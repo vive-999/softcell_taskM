@@ -35,7 +35,7 @@ class Task(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     assigned_to = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='+')
     project_id = models.ForeignKey(Project,on_delete=models.CASCADE)
     group_id = models.ForeignKey(Group,on_delete=models.CASCADE)
     

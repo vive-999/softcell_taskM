@@ -1,0 +1,88 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+    <h1 style="text-align:center">Incident Page</h1>
+    <hr />
+    <button
+      type="button"
+      class="btn btn-primary btn-div"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      data-bs-whatever="@getbootstrap"
+    >
+      <i class="bi bi-plus-circle"></i>
+      Add Incident
+    </button>
+
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Incident</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="date" class="col-form-label"> Date</label>
+                <input type="date" class="form-control" id="date" />
+              </div>
+
+              <div class="mb-3">
+                <label for="project_id" class="col-form-label"
+                  >Incident Number</label
+                >
+                <input type="number" class="form-control" id="project_id" />
+              </div>
+              <div class="mb-3">
+                <label for="sub_issuse" class="col-form-label"
+                  >Issuse Subject</label
+                >
+                <input type="text" class="form-control" id="sub_issuse" />
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label"
+                  >Description</label
+                >
+                <textarea class="form-control" id="message-text"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="status" class="col-form-label">Status</label>
+                <input type="text" class="form-control" id="status" />
+              </div>
+              <div class="mb-3">
+                <label for="assigned" class="col-form-label">Assigned To</label>
+                <input type="text" class="form-control" id="assigned" />
+              </div>
+              <div class="mb-3">
+                <label for="group" class="col-form-label">Service Group</label>
+                <input type="text" class="form-control" id="group" />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Create</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

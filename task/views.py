@@ -1,10 +1,20 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 # Create your views here.
-def home(request):
-    return HttpResponse("Welcome to task app")
-def detail(request):
-    return HttpResponse("Welcome to detail of task app")
-def about(request):
-    return HttpResponse("Welcome to about of task app")
+
+def addtask(request):
+    form = TaskForm(request.POST or None)
+
+    if form.is_valid():
+        obj = form.save(commit=False)
+        obj.save()
+        form = TaskForm()
+    return render(request,'task/addtask.html')
+
+from django.shortcuts import render
+from .forms import TaskForm
+# Create your views here.
+
+def add_task(request):
+    return render(request,"task/add-task.html",{"form":form})
+    # return render(request,"task/taskpage.html",{"form":form})

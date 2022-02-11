@@ -1,0 +1,61 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+<h1 style="text-align:center">Task Page</h1>
+<hr />
+<button type="button" class="btn btn-primary btn-div" data-bs-toggle="modal" data-bs-target="#exampleModal"
+  data-bs-whatever="@getbootstrap">
+  <i class="bi bi-plus-circle"></i>
+  Add Task
+</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action=""> {% csrf_token %}
+          <div class="mb-3">
+            <label for="id_title" class="col-form-label">Title</label>
+            <input type="text" name="title" maxlength="50" required id="id_title"/>
+          </div>
+          <div class="mb-3">
+            <label for="id_description" class="col-form-label">Description</label>
+            <textarea class="form-control" type="text" name="description" maxlength="200" required id="id_description"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="id_start_date" class="col-form-label">Start Date</label>
+            <input type="date" class="form-control" name="start_date" required id="id_start_date" />
+          </div>
+          <div class="mb-3">
+            <label for="id_end_date" class="col-form-label">End Date</label>
+            <input type="date" class="form-control" name="end_date" required id="id_end_date" />
+          </div>
+          <div class="mb-3">
+            <label for="assigned" class="col-form-label">Assigned To</label>
+            <input type="text" class="form-control" id="assigned" />
+          </div>
+          <div class="mb-3">
+            <label for="project_id" class="col-form-label">Project Id</label>
+            <input type="number" class="form-control" id="project_id" />
+          </div>
+          <div class="mb-3">
+            <label for="group_id" class="col-form-label">Group Id</label>
+            <input type="number" class="form-control" id="group_id" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Create</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

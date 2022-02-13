@@ -9,11 +9,12 @@
   Add User
 </button>
 
-<button type="button" class="btn btn-primary btn-div" data-bs-toggle="modal" data-bs-target="#exampleModal2"
+<button type="button" class="btn btn-primary btn-div" data-bs-toggle="modal" data-bs-target="#createemployee"
   data-bs-whatever="@getbootstrap">
   <i class="bi bi-plus-circle"></i>
   Add Employee
 </button>
+
 
 <!-- User Creation Form -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -56,8 +57,65 @@
   </div>
 </div>
 
-<!-- Making Users Employee Employee Creation Form -->
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- (ADD Employee)Making Users Employee Employee Creation Form -->
+<div class="modal fade" id="createemployee" tabindex="-1" aria-labelledby="createemployee" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Employee</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/employee"> {% csrf_token %}
+
+          <div class="mb-3">
+            <label for="newuser">Choose a User:</label>
+            <select  class="form-control" name="newuser" id="cars">
+              {% for new in newuser %}
+              <option value="{{new.id}}">{{new.username}}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="id_role" class="col-form-label">Employee Role</label>
+            <input type="text" name="role" maxlength="254" id="role" class="form-control" />
+          </div>
+
+          <div class="mb-3">
+            <label for="group_member">Choose a Group:</label>
+            <select class="form-control" name="group_member" id="cars">
+              {% for group in grouplist %}
+              <option class="form-control" value="{{group.id}}">{{group.name}}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="project_member">Choose a Project:</label>
+            <select class="form-control" name="project_member" id="cars">
+              {% for project in projectlist %}
+              <option value="{{project.id}}">{{project.name}}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- List All Users -->
+<div class="modal fade" id="listallusers" tabindex="-1" aria-labelledby="listallusers" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -65,46 +123,68 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form method="post" action=""> {% csrf_token %}
-          <!-- <div class="mb-3">
-                <label for="id_username" class="col-form-label">Username:</label>
-                <input type="text" name="username" maxlength="150" class="form-control" required id="id_username" />
-                <span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span>           
-              </div>
-              <div class="mb-3">
-                <label for="id_email" class="col-form-label">Email address:</label>
-                <input type="email" name="email" maxlength="254" id="id_email" class="form-control"  />
-              </div>
-              <div class="mb-3">
-                <label  for="id_password1" class="col-form-label">Password</label>
-                <input type="password" name="password1" required id="id_password1" class="form-control" />
-              </div>
-              <div class="mb-3">
-                <label for="id_password2" class="col-form-label">Password Confirmation</label>
-                <input type="password" name="password2" required id="id_password2" class="form-control"/>
-              </div> -->
-          {% for employee in employeeform %}
-
-
-                {{ employee.user.user.first_name }}
-           
-              {% endfor %}
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                  Close
-                </button>
-                <button type="submit" class="btn btn-primary">Create</button>
-              </div>
+        <form action="" method="POST">
+          {% csrf_token %}
+          <h1>Do you want to delete?</h1>
+          <a href="{{request.META.HTTP_REFERER}}">Cancel</a>
+          <input type="submit" value="Confirm">
         </form>
       </div>
     </div>
   </div>
 </div>
 
+<hr>
+
+<!-- List All Users -->
+<div class="justify-content-center container">
+  <h4>All Employees</h4>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+        <th scope="col">Is Employee</th>
+        <th scope="col">Role</th>
+        <th scope="col">Group Member</th>
+        <th scope="col">Project Member</th>
+        <th scope="col "><center>Action</center>
+        </th>
+
+      </tr>
+    </thead>
+
+    {% for user in all_users %}
+    <tbody>
+      <tr>
+        <td>{{user.id}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.profile|default:"N/A"}}</td>
+        <td>{{user.profile.role}}</td>
+        <td>{{user.profile.group_member}}</td>
+        <td>{{user.profile.project_member}}</td>
+        <td><a href="{% url 'update-user' user.id %}"><button type="button" class="btn btn-sm btn-success">Edit</button></a>
+          <a href="{% url 'delete-user' user.id %}"><button type="button"
+              class="btn btn-sm btn-danger">Delete</button></a>
+        </td>
+
+
+      </tr>
+    </tbody>
+    {% endfor %}
+
+  </table>
+</div>
+
+
+
+
+
+
 {% endblock %}
 
 {% block list %}
-
-
 
 {% endblock %}

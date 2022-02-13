@@ -1,5 +1,7 @@
 from django import  forms
 from django.core.exceptions import ValidationError
+
+
 from .models import Profile
 from django.forms import ModelForm
 from django.contrib.auth.models import User
@@ -12,6 +14,7 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 
 class EmployeeCreatiionForm(forms.ModelForm):
+
     class Meta:
         model = Profile
         fields = '__all__'

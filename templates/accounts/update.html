@@ -1,0 +1,61 @@
+{% extends 'accounts/base.html' %}
+{% block content %}
+
+
+
+
+<center>
+    This is Update Page
+    <div class="container">
+        <h1>Form</h1>
+            Edit User {{form.user}}
+        <form action="" method="POST">
+            {% csrf_token %}
+    
+
+                    {{form.user__email}}
+                
+                <div class="form-group" hidden>
+                    <label style=" text-align: right;
+                    clear: both;
+                    float:left;
+                    margin-left:30%;">User</label>
+                    {{ form.user }}
+                </div>
+                <br>
+            <div class="form-group">
+                <label style=" text-align: right;
+                clear: both;
+                float:left;
+                margin-left:27%;" >Role</label>{{ form.role }}
+            </div>
+            <br>
+            <div class="form-group">
+                <label style=" text-align: right;
+                clear: both;
+                float:left;
+                margin-left:30%;">Group Member</label>
+                {{ form.group_member }}
+            </div>
+            <br>
+            <div class="form-group">
+                <label style=" text-align: right;
+                clear: both;
+                float:left;
+                margin-left:30%;">Project Member</label>
+                {{ form.project_member }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                  Close
+                </button>
+                <button type="submit" class="btn btn-primary">Update</button>
+              </div>
+    
+        </form>
+    </div>
+</center>
+
+
+
+{% endblock %}

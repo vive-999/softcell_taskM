@@ -114,25 +114,7 @@
 
 
 
-<!-- List All Users -->
-<div class="modal fade" id="listallusers" tabindex="-1" aria-labelledby="listallusers" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="" method="POST">
-          {% csrf_token %}
-          <h1>Do you want to delete?</h1>
-          <a href="{{request.META.HTTP_REFERER}}">Cancel</a>
-          <input type="submit" value="Confirm">
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 <hr>
 
